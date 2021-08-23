@@ -2,13 +2,14 @@
 
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
-const {getRandomInt, shuffle, getCreatedDate} = require(`../../utils`);
+const {getCreatedDate, getTitle, getText, getCategories} = require(`../../utils`);
 const {
   DEFAULT_COUNT,
   MAX_COUNT,
   LIMIT_COUNT_MESSAGE,
   FILE_NAME,
-  ExitCode
+  ExitCode,
+  ANNOUNCE_LENGTH,
 } = require(`../constants`);
 const FILE_SENTENCES_PATH = `./data/sentences.txt`;
 const FILE_TITLES_PATH = `./data/titles.txt`;
@@ -44,12 +45,12 @@ module.exports = {
     const categories = await readContent(FILE_CATEGORIES_PATH);
 
     const publications = Array(countPublication).fill({}).map(() => ({
-      title: titles[getRandomInt(0, titles.length - 1)],
+      title: getTitle(titles),
       createdDate: getCreatedDate(),
-      announce: shuffle(sentences).slice(0, 4).join(` `),
-      fullText: shuffle(sentences).slice(0, getRandomInt(1, sentences.length - 1)).join(` `),
-      category: shuffle(categories).slice(0, getRandomInt(1, categories.length - 1)),
-    }))
+      announce: getText(sentences, ANNOUNCE_LENGTH),
+      fullText: getText(sentences, ANNOUNCE_LENGTH),
+      category: getCategories(categories),
+    }));
 
     const content = JSON.stringify(publications);
 

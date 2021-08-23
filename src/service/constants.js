@@ -11,6 +11,7 @@ const DEFAULT_COUNT = 1;
 const MAX_COUNT = 1000;
 const LIMIT_COUNT_MESSAGE = `Не больше 1000 публикаций`;
 const FILE_NAME = `mocks.json`;
+const ANNOUNCE_LENGTH = 4;
 
 module.exports = {
   DEFAULT_COMMAND,
@@ -20,4 +21,5 @@ module.exports = {
   MAX_COUNT,
   LIMIT_COUNT_MESSAGE,
   FILE_NAME,
+  ANNOUNCE_LENGTH,
 };
