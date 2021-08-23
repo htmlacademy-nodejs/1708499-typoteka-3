@@ -48,7 +48,7 @@ module.exports = {
       title: getTitle(titles),
       createdDate: getCreatedDate(),
       announce: getText(sentences, ANNOUNCE_LENGTH),
-      fullText: getText(sentences, ANNOUNCE_LENGTH),
+      fullText: getText(sentences),
       category: getCategories(categories),
     }));
 
