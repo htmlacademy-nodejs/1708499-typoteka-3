@@ -22,11 +22,27 @@ const getCreatedDate = () => {
   const endDate = dayjs().valueOf();
 
   return dayjs(getRandomInt(startDate, endDate)).format();
-}
+};
+
+const getTitle = (titles) => {
+  return titles[getRandomInt(0, titles.length - 1)];
+};
+
+const getText = (someArray, maxLength) => {
+  if (maxLength) {
+    return shuffle(someArray).slice(0, maxLength).join(` `);
+  }
+  return shuffle(someArray).slice(0, 0, getRandomInt(1, someArray.length - 1)).join(` `);
+};
+
+const getCategories = (categories) => {
+  return shuffle(categories).slice(0, getRandomInt(1, categories.length - 1));
+};
 
 module.exports = {
-  getRandomInt,
-  shuffle,
-  getCreatedDate
-}
+  getCreatedDate,
+  getTitle,
+  getText,
+  getCategories,
+};
 
