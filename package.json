@@ -5,9 +5,11 @@
   "main": "./src/service/service.js",
   "scripts": {
     "start": "node ./src/service/service.js",
+    "start-front-server": "node ./src/express/express.js",
     "dev": "nodemon ./src/service/service.js --server",
     "test": "npm run eslint",
-    "eslint": "eslint --ext .js src/"
+    "eslint": "eslint --ext .js src/",
+    "eslint-fix": "eslint --ext .js src/ --fix"
   },
   "repository": {
     "type": "git",
@@ -20,12 +22,31 @@
   },
   "homepage": "https://github.com/vened/1708499-typoteka-3#readme",
   "devDependencies": {
-    "eslint": "7.23.0",
-    "eslint-config-htmlacademy": "0.6.0",
-    "nodemon": "2.0.13"
+    "eslint": "7.32.0",
+    "eslint-config-htmlacademy": "4.1.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "husky": "7.0.2",
+    "lint-staged": "11.2.0",
+    "nodemon": "2.0.13",
+    "prettier": "2.4.1"
   },
   "dependencies": {
     "chalk": "4.1.2",
-    "dayjs": "1.10.5"
+    "dayjs": "1.10.5",
+    "express": "4.17.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --quiet --fix"
+    ],
+    "*.{json,md,html}": [
+      "prettier --write"
+    ]
   }
 }
