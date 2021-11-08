@@ -2,7 +2,12 @@
 
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
-const {getCreatedDate, getTitle, getText, getCategories} = require(`../../utils`);
+const nanoid = require(`nanoid`).nanoid;
+
+const { readFileContent, generateArray } = require(`../../utils/index.js`);
+const generateComments = require(`./generateComments`);
+const { getCreatedDate, getTitle, getText, getCategories } = require(`../../utils.js`);
+
 const {
   DEFAULT_COUNT,
   MAX_COUNT,
@@ -14,16 +19,6 @@ const {
 const FILE_SENTENCES_PATH = `./data/sentences.txt`;
 const FILE_TITLES_PATH = `./data/titles.txt`;
 const FILE_CATEGORIES_PATH = `./data/categories.txt`;
-
-const readContent = async (filePath) => {
-  try {
-    const content = await fs.readFile(filePath, `utf8`);
-    return content.trim().split(`\n`);
-  } catch (err) {
-    console.error(chalk.red(err));
-    return [];
-  }
-};
 
 const getCountPublication = (args) => {
   const [count] = args;
@@ -40,19 +35,24 @@ module.exports = {
       process.exit(ExitCode.error);
     }
 
-    const sentences = await readContent(FILE_SENTENCES_PATH);
-    const titles = await readContent(FILE_TITLES_PATH);
-    const categories = await readContent(FILE_CATEGORIES_PATH);
+    const sentences = await readFileContent(FILE_SENTENCES_PATH);
+    const titles = await readFileContent(FILE_TITLES_PATH);
+    const categories = await readFileContent(FILE_CATEGORIES_PATH);
 
-    const publications = Array(countPublication).fill({}).map(() => ({
-      title: getTitle(titles),
-      createdDate: getCreatedDate(),
-      announce: getText(sentences, ANNOUNCE_LENGTH),
-      fullText: getText(sentences),
-      category: getCategories(categories),
-    }));
+    const publications = generateArray(countPublication, async () => {
+      return {
+        id: nanoid(),
+        title: getTitle(titles),
+        createdDate: getCreatedDate(),
+        announce: getText(sentences, ANNOUNCE_LENGTH),
+        fullText: getText(sentences),
+        category: getCategories(categories),
+        comments: await generateComments(),
+      };
+    });
 
-    const content = JSON.stringify(publications);
+    const pubs = await Promise.all(publications);
+    const content = JSON.stringify(pubs, null, 2);
 
     try {
       await fs.writeFile(FILE_NAME, content);

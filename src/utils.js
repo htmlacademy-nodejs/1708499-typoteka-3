@@ -5,7 +5,7 @@ const dayjs = require('dayjs');
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min)) + min;
 };
 
 const shuffle = (someArray) => {
@@ -32,7 +32,9 @@ const getText = (someArray, maxLength) => {
   if (maxLength) {
     return shuffle(someArray).slice(0, maxLength).join(` `);
   }
-  return shuffle(someArray).slice(0, 0, getRandomInt(1, someArray.length - 1)).join(` `);
+  return shuffle(someArray)
+    .slice(0, 0, getRandomInt(1, someArray.length - 1))
+    .join(` `);
 };
 
 const getCategories = (categories) => {
@@ -44,5 +46,5 @@ module.exports = {
   getTitle,
   getText,
   getCategories,
+  getRandomInt,
 };
-
