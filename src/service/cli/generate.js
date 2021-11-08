@@ -4,9 +4,15 @@ const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
 const nanoid = require(`nanoid`).nanoid;
 
-const { readFileContent, generateArray } = require(`../../utils/index.js`);
+const {
+  readFileContent,
+  generateArray,
+  getCreatedDate,
+  getPostTitle,
+  getPostCategories,
+  getText,
+} = require(`../../utils/index.js`);
 const generateComments = require(`./generateComments`);
-const { getCreatedDate, getTitle, getText, getCategories } = require(`../../utils.js`);
 
 const {
   DEFAULT_COUNT,
@@ -42,11 +48,11 @@ module.exports = {
     const publications = generateArray(countPublication, async () => {
       return {
         id: nanoid(),
-        title: getTitle(titles),
+        title: getPostTitle(titles),
         createdDate: getCreatedDate(),
         announce: getText(sentences, ANNOUNCE_LENGTH),
         fullText: getText(sentences),
-        category: getCategories(categories),
+        category: getPostCategories(categories),
         comments: await generateComments(),
       };
     });

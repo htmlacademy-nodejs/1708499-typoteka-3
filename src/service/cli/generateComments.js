@@ -2,8 +2,7 @@
 
 const nanoid = require(`nanoid`).nanoid;
 
-const { readFileContent, generateArray } = require(`../../utils/index.js`);
-const { getRandomInt, getText } = require(`../../utils`);
+const { readFileContent, generateArray, getRandomInt, getText } = require(`../../utils/index.js`);
 const {
   MIN_COUNT_COMMENTS,
   MAX_COUNT_COMMENTS,
