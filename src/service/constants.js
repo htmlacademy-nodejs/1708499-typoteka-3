@@ -16,6 +16,7 @@ const MIN_COUNT_COMMENTS = 1;
 const MAX_COUNT_COMMENTS = 10;
 const MIN_COMMENT_LENGTH = 1;
 const MAX_COMMENT_LENGTH = 5;
+const MAX_ID_LENGTH = 6;
 
 module.exports = {
   DEFAULT_COMMAND,
@@ -30,4 +31,5 @@ module.exports = {
   MAX_COUNT_COMMENTS,
   MIN_COMMENT_LENGTH,
   MAX_COMMENT_LENGTH,
+  MAX_ID_LENGTH,
 };

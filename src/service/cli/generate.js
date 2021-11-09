@@ -2,7 +2,7 @@
 
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
-const nanoid = require(`nanoid`).nanoid;
+const { nanoid } = require(`nanoid`);
 
 const {
   readFileContent,
@@ -21,6 +21,7 @@ const {
   FILE_NAME,
   ExitCode,
   ANNOUNCE_LENGTH,
+  MAX_ID_LENGTH,
 } = require(`../constants`);
 const FILE_SENTENCES_PATH = `./data/sentences.txt`;
 const FILE_TITLES_PATH = `./data/titles.txt`;
@@ -47,7 +48,7 @@ module.exports = {
 
     const publications = generateArray(countPublication, async () => {
       return {
-        id: nanoid(),
+        id: nanoid(MAX_ID_LENGTH),
         title: getPostTitle(titles),
         createdDate: getCreatedDate(),
         announce: getText(sentences, ANNOUNCE_LENGTH),
