@@ -10,6 +10,11 @@ module.exports = (app, service) => {
 
   route.get(`/`, (req, res) => {
     const categories = service.findAll();
+
+    if (!categories || categories.length === 0) {
+      return res.status(HttpCode.NOT_FOUND).send(`Not found categories.`);
+    }
+
     res.status(HttpCode.OK).json(categories);
   });
 };
