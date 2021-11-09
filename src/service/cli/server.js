@@ -2,6 +2,8 @@
 
 const chalk = require(`chalk`);
 const express = require(`express`);
+const routes = require(`../api`);
+const { API_PREFIX } = require(`../constants`);
 const postsRoutes = require(`./routes/posts-routes`);
 const DEFAULT_PORT = 3000;
 
@@ -12,7 +14,8 @@ module.exports = {
     const port = Number.parseInt(customPort, 10) || DEFAULT_PORT;
 
     const app = express();
-    app.use(`/`, postsRoutes);
+    app.use(API_PREFIX, routes);
+    // app.use(`/`, postsRoutes);
 
     app
       .listen(port)

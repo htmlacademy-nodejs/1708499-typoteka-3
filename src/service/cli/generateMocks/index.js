@@ -11,25 +11,24 @@ const {
   getPostTitle,
   getPostCategories,
   getText,
-} = require(`../../utils/index.js`);
+} = require(`../../../utils`);
 const generateComments = require(`./generateComments`);
-
 const {
-  DEFAULT_COUNT,
-  MAX_COUNT,
-  LIMIT_COUNT_MESSAGE,
-  FILE_NAME,
-  ExitCode,
-  ANNOUNCE_LENGTH,
+  DEFAULT_COUNT_PUBLICATIONS,
+  MAX_COUNT_PUBLICATIONS,
+  LIMIT_COUNT_PUBLICATIONS_MESSAGE,
   MAX_ID_LENGTH,
-} = require(`../constants`);
-const FILE_SENTENCES_PATH = `./data/sentences.txt`;
-const FILE_TITLES_PATH = `./data/titles.txt`;
-const FILE_CATEGORIES_PATH = `./data/categories.txt`;
+  PUBLICATION_ANNOUNCE_LENGTH,
+  MOCK_FILE_PATH,
+  FILE_SENTENCES_PATH,
+  FILE_TITLES_PATH,
+  FILE_CATEGORIES_PATH,
+} = require(`./mocksConatants`);
+const { ExitCode } = require(`../../constants`);
 
 const getCountPublication = (args) => {
   const [count] = args;
-  return Number.parseInt(count, 10) || DEFAULT_COUNT;
+  return Number.parseInt(count, 10) || DEFAULT_COUNT_PUBLICATIONS;
 };
 
 module.exports = {
@@ -37,8 +36,8 @@ module.exports = {
   async run(args) {
     const countPublication = getCountPublication(args);
 
-    if (countPublication > MAX_COUNT) {
-      console.error(chalk.red(LIMIT_COUNT_MESSAGE));
+    if (countPublication > MAX_COUNT_PUBLICATIONS) {
+      console.error(chalk.red(LIMIT_COUNT_PUBLICATIONS_MESSAGE));
       process.exit(ExitCode.error);
     }
 
@@ -51,7 +50,7 @@ module.exports = {
         id: nanoid(MAX_ID_LENGTH),
         title: getPostTitle(titles),
         createdDate: getCreatedDate(),
-        announce: getText(sentences, ANNOUNCE_LENGTH),
+        announce: getText(sentences, PUBLICATION_ANNOUNCE_LENGTH),
         fullText: getText(sentences),
         category: getPostCategories(categories),
         comments: await generateComments(),
@@ -62,7 +61,7 @@ module.exports = {
     const content = JSON.stringify(pubs, null, 2);
 
     try {
-      await fs.writeFile(FILE_NAME, content);
+      await fs.writeFile(MOCK_FILE_PATH, content);
       console.log(chalk.green(`Operation success. File created.`));
       process.exit(ExitCode.success);
     } catch (err) {

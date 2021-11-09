@@ -1,7 +1,7 @@
 'use strict';
 
 const help = require(`./help`);
-const generate = require(`./generate`);
+const generate = require(`./generateMocks`);
 const version = require(`./version`);
 const server = require(`./server`);
 
