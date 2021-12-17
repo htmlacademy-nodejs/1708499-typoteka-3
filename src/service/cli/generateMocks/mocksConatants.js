@@ -13,7 +13,6 @@ const MIN_COUNT_COMMENTS = 1;
 const MAX_COUNT_COMMENTS = 10;
 const MIN_LENGTH_COMMENT = 1;
 const MAX_LENGTH_COMMENT = 5;
-const MAX_ID_LENGTH = 6;
 
 const FILE_SENTENCES_PATH = path.join(__dirname, `../../../../`, `data`, `sentences.txt`);
 const FILE_TITLES_PATH = path.join(__dirname, `../../../../`, `data`, `titles.txt`);
@@ -31,7 +30,6 @@ module.exports = {
   MAX_COUNT_COMMENTS,
   MIN_LENGTH_COMMENT,
   MAX_LENGTH_COMMENT,
-  MAX_ID_LENGTH,
 
   FILE_SENTENCES_PATH,
   FILE_TITLES_PATH,

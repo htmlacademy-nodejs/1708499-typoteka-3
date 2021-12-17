@@ -8,9 +8,9 @@ const {
   MAX_COUNT_COMMENTS,
   MIN_LENGTH_COMMENT,
   MAX_LENGTH_COMMENT,
-  MAX_ID_LENGTH,
   FILE_COMMENTS_PATH,
 } = require(`./mocksConatants`);
+const { MAX_ID_LENGTH } = require(`../../constants`);
 
 async function generateComments() {
   const commentsLength = getRandomInt(MIN_COUNT_COMMENTS, MAX_COUNT_COMMENTS);

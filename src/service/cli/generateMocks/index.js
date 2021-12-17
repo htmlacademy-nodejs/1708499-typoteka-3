@@ -17,14 +17,13 @@ const {
   DEFAULT_COUNT_PUBLICATIONS,
   MAX_COUNT_PUBLICATIONS,
   LIMIT_COUNT_PUBLICATIONS_MESSAGE,
-  MAX_ID_LENGTH,
   PUBLICATION_ANNOUNCE_LENGTH,
   MOCK_FILE_PATH,
   FILE_SENTENCES_PATH,
   FILE_TITLES_PATH,
   FILE_CATEGORIES_PATH,
 } = require(`./mocksConatants`);
-const { ExitCode } = require(`../../constants`);
+const { ExitCode, MAX_ID_LENGTH } = require(`../../constants`);
 
 const getCountPublication = (args) => {
   const [count] = args;
